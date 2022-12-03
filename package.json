@@ -1,5 +1,27 @@
 {
   "dependencies": {
-    "express": "^4.18.2"
-  }
+    "dotenv": "^16.0.3",
+    "ejs": "^3.1.8",
+    "express": "^4.18.2",
+    "nodemon": "^2.0.20"
+  },
+  "name": "node",
+  "description": "Test NodeJS",
+  "version": "1.0.0",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon ./src/main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DHoa0202/bookish-meme.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DHoa0202/bookish-meme/issues"
+  },
+  "homepage": "https://github.com/DHoa0202/bookish-meme#readme"
 }
