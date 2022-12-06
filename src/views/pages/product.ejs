@@ -1,0 +1,34 @@
+<h1 id="product">Sản phẩm</h1>
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th>image</th>
+      <th>id</th>
+      <th>name</th>
+      <th>price</th>
+      <th>quantity</th>
+      <th>regDate</th>
+      <th>category_name</th>
+      <th>control</th>
+    </tr>
+
+  </thead>
+  <tbody>
+    <% data.forEach(e => {%>
+    <tr>
+      <td>
+        <img src="<%= e.image %>" alt="<%= e.image %>" style="width: 64px; object-fit: cover;">
+      </td>
+      <td><%= e.id %></td>
+      <td><%= e.name %></td>
+      <td><%= e.price %></td>
+      <td><%= e.quantity %></td>
+      <td><%= date(e.regDate, 'LLLL')%></td>
+      <td><%= e.category_name %></td>
+      <td>
+        <button>delete <%-e.id%></button>
+      </td>
+    </tr>
+    <% }) %>
+  </tbody>
+</table>
