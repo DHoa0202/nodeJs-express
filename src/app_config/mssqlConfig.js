@@ -1,19 +1,19 @@
 import dotenv from 'dotenv';
 
 const properties = dotenv.config().parsed;
-const sqlConfig = {
+
+export default {
     user: properties.DB_USER,
-    password: properties.DB_PWD,
+    password: properties.DB_PASS,
     database: properties.DB_NAME,
-    server: 'localhost',
+    server: properties.DB_SERVER,
     pool: {
         max: 10,
         min: 0,
         idleTimeoutMillis: 20000
     },
     options: {
-        encrypt: true, // for azure
+        encrypt: true,
         trustServerCertificate: true // change to true for local dev / self-signed certs
     }
-}
-export default sqlConfig;
+};

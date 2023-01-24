@@ -13,4 +13,7 @@ viewEngine(app); // security
 application(app) // router
 
 // START SERVER
-app.listen(port,()=>console.log(`Application start server with port: ${port}`));
+app.listen(port, () => console.log(
+    `\nApplication start server with port: ${port}`,
+    `\nhttp://127.0.0.1:${port}\n`
+));
