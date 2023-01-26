@@ -2,30 +2,38 @@
 <table class="table table-striped table-hover">
   <thead>
     <!-- ATTRIBUTES're NAME -->
-    <tr>
-      <th>image</th>
+    <tr class="text-center">
+      <th class="text-start">image</th>
       <th>id</th>
       <th>name</th>
       <th>price</th>
       <th>quantity</th>
       <th>regDate</th>
       <th>category_name</th>
-      <th>control</th>
+      <th class="text-end">control</th>
     </tr>
     <!-- SHOW DETAILS -->
-    <tr>
-      <td><img src="<%-entity.image%>" alt="<%-entity.image%>" width="64px"></td>
-      <td><input class="form-control" type="number" value="<%-entity.id%>" name="id"></td>
-      <td><input class="form-control" type="text" value="<%-entity.name%>" name="name"></td>
-      <td><input class="form-control" type="number" step=".1" value="<%-entity.price%>" name="price"></td>
-      <td><input class="form-control" type="number" value="<%-entity.quantity%>" name="quantity"></td>
+    <tr class="vertical-middle">
       <td>
+        <div class="file-hidden">
+          <img src="<%-entity.image%>" alt="<%-entity.image%>" width="64px" id="showImage">
+          <input type="file" accept="image/png, image/jpeg" name="files" form="productForm" onchange="changeImage(this, showImage)">
+        </div>
+      </td>
+      <td><input class="form-control" type="number" value="<%-entity.id%>" form="productForm" name="id"></td>
+      <td><input class="form-control" type="text" value="<%-entity.name%>" form="productForm" name="name"></td>
+      <td><input class="form-control" type="number" step=".1" value="<%-entity.price%>" form="productForm" name="price">
+      </td>
+      <td><input class="form-control" type="number" value="<%-entity.quantity%>" form="productForm" name="quantity">
+      </td>
+      <td>
+        <input type="hidden" value="<%-entity.regDate%>" name="entity.regDate">
         <span class="form-control bg-secondary text-nowrap bg-opacity-25">
           <%= date(entity.regDate, 'LLLL' )%>
         </span>
       </td>
       <td>
-        <select class="form-control border-warning" name="category_id">
+        <select class="form-control border-warning" name="category_id" form="productForm">
           <% categories.forEach((e, i)=> { if(e.id == entity.category_id) {%>
             <option value="<%=e.id%>" selected>
               <%=e.name%>
@@ -38,9 +46,10 @@
         </select>
       </td>
       <td>
-        <form class="text-center d-flex gap-3" action="/products" method="post">
+        <form class="text-center d-flex gap-3" action="/products" method="post" id="productForm" enctype="multipart/form-data">
           <button type="submit" class="btn btn-outline-success" formaction="/insert_products">Create</button>
           <button type="submit" class="btn btn-outline-warning" formaction="/update_products">Update</button>
+          <button type="reset" class="btn btn-outline-secondary ms-1">clear</button>
         </form>
       </td>
     </tr>
@@ -50,7 +59,11 @@
     <% data.forEach((e, i)=> {%>
       <tr style="vertical-align: middle;">
         <td>
-          <img src="<%= e.image %>" alt="<%= e.image %>" style="width: 64px; object-fit: cover;">
+          <% if(e.image) { %>
+            <img src="<%= e.image %>" alt="<%= e.image %>" style="width: 64px; object-fit: cover;">
+            <% } else { %>
+              <img src="/images/default.jpg" alt="<%= e.image %>" style="width: 64px; object-fit: cover;">
+              <% } %>
         </td>
         <td>
           <%= e.id %>
@@ -73,7 +86,7 @@
         <td class="text-end">
           <a href="/products/<%-data[i].id%>">detail</a>
           <button onclick="
-            if(confirm('Xác nhận xóa <%-data[i].name%>')) location.href = `/delete_products/<%-data[i].id%>`
+            if(confirm('Confirm deletion <%-data[i].name%>')) location.href = `/delete_products/<%-data[i].id%>`
           " type="button" class="btn btn-outline-danger">delete</button>
         </td>
       </tr>

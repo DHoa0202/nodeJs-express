@@ -1,48 +1,42 @@
+import moment from 'moment';
 import sql from './sqlService.js';
 import query from '../util/query.js';
-import util from '../util/util.js';
-import storage from '../util/storage.js';
-import dateRelative from '../util/momen.js';
-
-const routes = [...storage.breadcumb, { href: '#product', name: 'Sản phẩm' }];
 
 class productDAO {
 
-    getList(req, res) {
-        // callback function
-        sql.execute(
-            "SELECT p.*, c.name as 'category_name' FROM PRODUCTS p ",
-            "INNER JOIN CATEGORIES c ON p.category_id=c.id"
-        ).then(
-            r => res.render('', {
-                routes: routes, page: 'pages/product', date: dateRelative,
-                data: storage.products = r.recordset, entity: r.recordset[0],
-                categories: storage.categories
-            })
-        ).catch(e => console.error(e));
-    };
-    getById(req, resp) {
-        // callback function
-        sql.execute(
-            "SELECT p.*, c.name as 'category_name' FROM PRODUCTS p ",
-            `INNER JOIN CATEGORIES c ON p.category_id=c.id WHERE p.id = ${req.params['0']}`
-        ).then(
-            r => resp.render('', {
-                routes: routes, page: 'pages/product', date: dateRelative,
-                data: storage.products, entity: r.recordset[0],
-                categories: storage.categories
-            })
-        ).catch(e => console.error(e));
-    };
-    insert(req, resp) {
-        throw new Error('todo...')
-    };
-    update(req, resp) {
-        throw new Error('todo...')
-    };
-    delete(req, resp) {
-        throw new Error('todo...')
-    };
+    getList = (top, ...serials) => sql.execute(
+        `SELECT TOP ${top || 1000} p.*, c.name as 'category_name' FROM PRODUCTS p `,
+        `INNER JOIN CATEGORIES c ON p.category_id=c.id ${serials.join('\xa0').toString()}`
+    ).then(r => r.recordset
+    ).catch(e => console.error(e));
+
+
+    getById = (id) => this.getList(undefined, `WHERE p.id = ${id}`).then(r => r[0]);
+
+    insert = async (entity) => {
+        entity.regDate = moment(new Date()).format('YYYY-MM-DD HH:mm:ss.SSS')
+        
+        return sql
+            .execute(query.insert('PRODUCTS', entity, 'id', 'files'))
+            .then(r => this.getList(1, 'ORDER BY id DESC').then(r2 => r2[0]))
+            .catch(e => console.error(e));
+    }
+
+    async update(entity) {
+        entity.regDate = moment(entity.regDate).format('YYYY-MM-DD HH:mm:ss.SSS')
+
+        return await sql
+            .execute(query.update('PRODUCTS', 'id', entity, 'id', 'files'))
+            .then(r => this.getById(entity['id']))
+            .catch(e => console.error(e));
+
+    }
+    async delete(id) {
+        return await sql
+            .execute(query.delete('PRODUCTS', 'id', id))
+            .then(r => r.rowsAffected[0])
+            .catch(e => console.error(e));
+    }
 }
 
 export default new productDAO();

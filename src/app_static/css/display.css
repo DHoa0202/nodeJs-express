@@ -1,3 +1,5 @@
+@import url("product.css");
+
 /* BREADCUMB */
 ul.breadcrumb {
     padding: .5rem 1rem;
@@ -29,4 +31,8 @@ ul.breadcrumb li:last-child a {
     color: grey;
     text-decoration: none;
     
+}
+
+.vertical-middle td {
+    vertical-align: middle;
 }

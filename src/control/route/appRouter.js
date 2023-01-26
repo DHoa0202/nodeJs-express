@@ -1,33 +1,39 @@
 import express from "express";
-import control from '../controller/appController.js';
+import multer from 'multer';
+import appControl from '../controller/appController.js';
+import categoryControl from '../controller/categoryControl.js';
+import productControl from '../controller/productControl.js';
 
-let router = express.Router();
+
+const router = express.Router();
+const upload = multer({ dest: 'src/app_static/images' });
 
 export default (app) => {
-    app.use(express.urlencoded({ extended: true }));
-    app.use(express.json());
+    // app.use(express.urlencoded({ extended: true }));
+    // app.use(express.json());
     
     // APP METHODS
-    router.get('/info', control.app.info);
+    router.get('/info', appControl.info);
+    router.get('/home', appControl.home);
 
     // CATEGORY
     router
-        .get('/categories', control.categoryDAO.getList)
-        .get('/categories/*', control.categoryDAO.getById)
-        .get('/delete_categories/*', control.categoryDAO.delete)
-        .post('/insert_categories', control.categoryDAO.insert)
-        .post('/update_categories', control.categoryDAO.update);
+        .get('/categories', categoryControl.categories)
+        .get('/categories/*', categoryControl.category)
+        .get('/delete_categories/*', categoryControl.delete)
+        .post('/insert_categories', categoryControl.save)
+        .post('/update_categories', categoryControl.update);
     
     // PRODUCT
     router
-        .get('/products', control.productDAO.getList)
-        .get('/products/*', control.productDAO.getById)
-        .get('/delete_products/*', control.productDAO.delete)
-        .post('/insert_products', control.productDAO.insert)
-        .post('/update_products', control.productDAO.update);
+        .get('/products', productControl.products)
+        .get('/products/*', productControl.product)
+        .get('/delete_products/*', productControl.delete)
+        .post('/insert_products', upload.single('files'), productControl.save)
+        .post('/update_products', upload.single('files'), productControl.update);
 
     // OTHERS
-    router.get('/*', control.app.home);
+    router.get('/*', appControl.home);
 
     return app.use('/', router);
 }
