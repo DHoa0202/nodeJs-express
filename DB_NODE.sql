@@ -25,7 +25,7 @@ CREATE TABLE PRODUCTS(
 	regDate datetime default getdate(),
 	image nvarchar(255),
 
-	category_id int foreign key references CATEGORIES(id) on update cascade on delete cascade
+	category_id int foreign key references CATEGORIES(id) on update cascade on delete no action
 )
 GO
 	DELETE FROM CATEGORIES

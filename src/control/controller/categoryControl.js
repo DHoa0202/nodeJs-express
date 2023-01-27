@@ -3,7 +3,7 @@ import util from '../../model/util/util.js';
 import dao from '../../model/dao/categoryDAO.js';
 import storage from '../../model/util/storage.js';
 
-const routes = [...storage.breadcumb, { href: '#category', name: 'Phân loại' }];
+const routes = storage.breadcumb.concat({ href: '#category', name: 'Phân loại' });
 
 class categotyControl {
 

@@ -5,17 +5,19 @@ import cDao from '../../model/dao/categoryDAO.js';
 import storage from '../../model/util/storage.js';
 import dateRelative from '../../model/util/moment.js';
 
-const routes = [...storage.breadcumb, { href: '#product', name: 'Sản phẩm' }];
+const routes = storage.breadcumb.concat({ href: '#product', name: 'Sản phẩm' });
 
 class productControl {
 
-    async products(req, res) {
+    async products(_req, res) {
+
         // get all categories when array is empty
         if (!storage.categories.length) await cDao.getList()
             .then(r => storage.categories = r)
             .catch(err => console.error(err));
-        // get all products when array is empty 
-        if (!storage.products.length) await dao.getList()
+
+        // get all products
+        await dao.getList()
             .then(r => storage.products = r)
             .catch(err => console.error(err));
 
@@ -33,7 +35,7 @@ class productControl {
     async save(req, res) {
         // add file name if file already
         if (req.file) req.body['image'] = `/images/${req.file['filename']}`
-        
+
         await dao.insert(req.body) // save data
             .then(r => storage.products.unshift(r))
             .catch(err => console.error(err));
@@ -66,7 +68,7 @@ class productControl {
         }).catch(err => console.error(err));
 
         await dao.delete(id) // delete data by id
-            .then(r => util.delete(storage.products, id, 'id'))
+            .then(_r => util.delete(storage.products, id, 'id'))
             .catch(err => console.error(err));
 
         return res.render('', productControl.#render());
