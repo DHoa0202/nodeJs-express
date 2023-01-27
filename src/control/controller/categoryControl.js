@@ -7,44 +7,44 @@ const routes = [...storage.breadcumb, { href: '#category', name: 'Phân loại' 
 
 class categotyControl {
 
-    categories = (req, res) => dao.getList().then(
-        r => res.render('', {
+    categories = (_req, res) => dao.getList()
+        .then(r => storage.categories = r)
+        .catch(err => console.error(err))
+        .finally(() => res.render('', categotyControl.#render()));
+
+    category = async (req, res) => {
+        let entity = { id: -1 }
+        return dao.getById(req.params['0'])
+            .then(r => entity = r)
+            .catch(err => console.error(err))
+            .finally(() => res.render('', categotyControl.#render({ entity: entity })));
+    }
+
+    save = (req, res) => dao.insert(req.body)
+        .then(r => storage.categories.unshift(r))
+        .catch(err => console.error(err.originalError.message))
+        .finally(() => res.render('', categotyControl.#render()));
+
+    update = (req, res) => dao.update(req.body)
+        .then(r => util.update(storage.categories, r, 'id'))
+        .catch(err => console.error(err.originalError.message))
+        .finally(() => res.render('', categotyControl.#render()));
+
+    delete = (req, res) => dao.delete(req.params['0'])
+        .then(_r => util.delete(storage.categories, req.params['0'], 'id'))
+        .catch(err => console.error(err.originalError.message))
+        .finally(() => res.render('', categotyControl.#render()));
+
+    static #render(change) {
+        let temp = storage.categories;
+        temp = temp.length ? (Number.parseInt(temp.slice(-1)[0].id) + 1) : 1
+        var response = {
             routes: routes, page: 'pages/category',
-            data: storage.categories = r,
-            entity: { id: storage.categories.slice(-1)[0].id + 1 }
-        })
-    ).catch(err => console.error(err));
-
-    category = (req, res) => dao.getById(req.params['0']).then(
-        r => res.render('', {
-            routes: routes, page: 'pages/category',
-            data: storage.categories, entity: r
-        })
-    ).catch(err => console.error(err));
-
-    save = (req, res) => dao.insert(req.body).then(
-        r => res.render('', {
-            routes: routes, page: 'pages/category',
-            data: util.insert(storage.categories, req.body),
-            entity: { id: (Number.parseInt(storage.categories.slice(-1)[0].id) + 1) }
-        })
-    ).catch(err => console.error(err));
-
-    update = (req, res) => dao.update(req.body).then(
-        r => res.render('', {
-            routes: routes, page: 'pages/category',
-            data: util.update(storage.categories, req.body, 'id'),
-            entity: { id: (Number.parseInt(storage.categories.slice(-1)[0].id) + 1) }
-        })
-    ).catch(err => console.error(err));
-
-    delete = (req, res) => dao.delete(req.params['0']).then(
-        r => res.render('', {
-            routes: routes, page: 'pages/category', entity: {},
-            data: util.delete(storage.categories, req.params['0'], 'id')
-        })
-    ).catch(err => console.error(err));
-
+            data: storage.categories, entity: { id: temp }
+        }
+        for (const key in change) response[key] = change[key];
+        return response;
+    }
 }
 
 export default new categotyControl();

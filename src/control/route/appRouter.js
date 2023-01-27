@@ -20,9 +20,9 @@ export default (app) => {
     router
         .get('/categories', categoryControl.categories)
         .get('/categories/*', categoryControl.category)
-        .get('/delete_categories/*', categoryControl.delete)
-        .post('/insert_categories', categoryControl.save)
-        .post('/update_categories', categoryControl.update);
+        .get('/delete_categories/*',categoryControl.delete)
+        .post('/insert_categories', upload.none(), categoryControl.save)
+        .post('/update_categories', upload.none(), categoryControl.update);
     
     // PRODUCT
     router

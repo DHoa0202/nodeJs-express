@@ -15,7 +15,7 @@
     <!-- SHOW DETAILS -->
     <tr class="vertical-middle">
       <td>
-        <div class="file-hidden">
+        <div class="file-hidden" title="on click to upload product is image">
           <img src="<%-entity.image%>" alt="<%-entity.image%>" width="64px" id="showImage">
           <input type="file" accept="image/png, image/jpeg" name="files" form="productForm" onchange="changeImage(this, showImage)">
         </div>
@@ -63,7 +63,7 @@
             <img src="<%= e.image %>" alt="<%= e.image %>" style="width: 64px; object-fit: cover;">
             <% } else { %>
               <img src="/images/default.jpg" alt="<%= e.image %>" style="width: 64px; object-fit: cover;">
-              <% } %>
+            <% } %>
         </td>
         <td>
           <%= e.id %>
