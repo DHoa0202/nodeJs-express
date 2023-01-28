@@ -36,6 +36,7 @@ class categotyControl {
         .finally(() => res.render('', categotyControl.#render()));
 
     static #render(change) {
+
         let temp = storage.categories;
         temp = temp.length ? (Number.parseInt(temp.slice(-1)[0].id) + 1) : 1
         var response = {
@@ -44,6 +45,56 @@ class categotyControl {
         }
         for (const key in change) response[key] = change[key];
         return response;
+    }
+
+    constructor() {
+        this.api = {
+            // get all categories
+            categories: (_req, res) => dao.getList()
+                .then(result => res.status(200).json({
+                    message: 'ok', data: result
+                }))
+                .catch(error => res.status(500).json({
+                    message: error.originalError.message,
+                    data: error.originalError
+                })),
+            // get category by id
+            category: (req, res) => dao.getById(req.params['0'])
+                .then(result => res.status(200).json({
+                    message: 'ok', data: result
+                }))
+                .catch(error => res.status(500).json({
+                    message: error.originalError.message,
+                    data: error.originalError
+                })),
+            // insert category
+            save: (req, res) => dao.insert(req.body)
+                .then(result => res.status(200).json({
+                    message: 'ok', data: result
+                }))
+                .catch(err => res.status(500).json({
+                    message: err.originalError.message,
+                    data: err.originalError
+                })),
+            // update category
+            update: (req, res) => dao.update(req.body)
+                .then(result => res.status(200).json({
+                    message: 'ok', data: result
+                }))
+                .catch(err => res.status(500).json({
+                    message: err.originalError.message,
+                    data: err.originalError
+                })),
+            // delete category
+            delete: (req, res) => dao.delete(req.params['0'])
+                .then(result => res.status(200).json({
+                    message: 'ok', data: result
+                }))
+                .catch(err => res.status(500).json({
+                    message: err.originalError.message,
+                    data: err.originalError
+                }))
+        }
     }
 }
 
