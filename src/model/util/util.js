@@ -47,22 +47,5 @@ export default {
         if (-1 < i) array.splice(i, 1);
         else throw `The ${value} value of the key ${by} does not exist!`
         return array;
-    },
-    // create form.body for client: default File:<files=...> & directory: <dir=...>
-    getMultipart: (entity, input, dir) => {
-        if (!input.files) return [entity];
-
-        let files = input.files;
-        let data = new FormData();
-        let keys = Object.keys(entity);
-
-        data.append('dir', dir)
-        for (f of files) data.append('files', f) // prepare files
-        for (k of keys) data.append(k, entity[k]) // prepare entity's fields
-
-        return [data, {
-            TransformRequest: angular.identity,
-            headers: { 'content-Type': undefined }
-        }];
     }
 }

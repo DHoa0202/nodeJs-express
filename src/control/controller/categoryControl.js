@@ -22,17 +22,17 @@ class categotyControl {
 
     save = (req, res) => dao.insert(req.body)
         .then(r => storage.categories.unshift(r))
-        .catch(err => console.error(err.originalError.message))
+        .catch(err => console.error(err.message))
         .finally(() => res.render('', categotyControl.#render()));
 
     update = (req, res) => dao.update(req.body)
         .then(r => util.update(storage.categories, r, 'id'))
-        .catch(err => console.error(err.originalError.message))
+        .catch(err => console.error(err.message))
         .finally(() => res.render('', categotyControl.#render()));
 
     delete = (req, res) => dao.delete(req.params['0'])
         .then(_r => util.delete(storage.categories, req.params['0'], 'id'))
-        .catch(err => console.error(err.originalError.message))
+        .catch(err => console.error(err.message))
         .finally(() => res.render('', categotyControl.#render()));
 
     static #render(change) {
@@ -51,49 +51,24 @@ class categotyControl {
         this.api = {
             // get all categories
             categories: (_req, res) => dao.getList()
-                .then(result => res.status(200).json({
-                    message: 'ok', data: result
-                }))
-                .catch(error => res.status(500).json({
-                    message: error.originalError.message,
-                    data: error.originalError
-                })),
+                .then(result => res.status(200).json(result))
+                .catch(error => res.status(400).json(error)),
             // get category by id
             category: (req, res) => dao.getById(req.params['0'])
-                .then(result => res.status(200).json({
-                    message: 'ok', data: result
-                }))
-                .catch(error => res.status(500).json({
-                    message: error.originalError.message,
-                    data: error.originalError
-                })),
+                .then(result => res.status(200).json(result))
+                .catch(error => res.status(400).json(error)),
             // insert category
             save: (req, res) => dao.insert(req.body)
-                .then(result => res.status(200).json({
-                    message: 'ok', data: result
-                }))
-                .catch(err => res.status(500).json({
-                    message: err.originalError.message,
-                    data: err.originalError
-                })),
+                .then(result => res.status(200).json(result))
+                .catch(error => res.status(400).json(error)),
             // update category
             update: (req, res) => dao.update(req.body)
-                .then(result => res.status(200).json({
-                    message: 'ok', data: result
-                }))
-                .catch(err => res.status(500).json({
-                    message: err.originalError.message,
-                    data: err.originalError
-                })),
+                .then(result => res.status(200).json(result))
+                .catch(error => res.status(400).json(error)),
             // delete category
             delete: (req, res) => dao.delete(req.params['0'])
-                .then(result => res.status(200).json({
-                    message: 'ok', data: result
-                }))
-                .catch(err => res.status(500).json({
-                    message: err.originalError.message,
-                    data: err.originalError
-                }))
+                .then(result => res.status(200).json(result))
+                .catch(error => res.status(400).json(error)),
         }
     }
 }

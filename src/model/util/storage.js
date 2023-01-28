@@ -1,6 +1,6 @@
 var breadcumb = [
     { href: '/', name: 'Node' },
-    { href: '/home', name: 'Trang chủ' }
+    { href: '/home', name: 'Home' }
 ], categories = [], products = [];
 
 export default {

@@ -6,7 +6,7 @@ export default {
     },
     info(_req, res) {
         return res.render('', {
-            routes: storage.breadcumb.concat({ href: '#info', name: 'Thông tin' }), page: 'pages/info'
+            routes: storage.breadcumb.concat({ href: '#info', name: 'Information' }), page: 'pages/info'
         })
     }
 }

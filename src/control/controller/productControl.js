@@ -84,6 +84,49 @@ class productControl {
         return response;
     }
 
+    constructor() {
+        this.api = {
+            // get all products
+            products: (_req, res) => dao.getList()
+                .then(result => res.status(200).json(result))
+                .catch(error => res.status(400).json(error)),
+            // get product by id
+            product: (req, res) => dao.getById(req.params['0'])
+                .then(result => res.status(200).json(result))
+                .catch(error => res.status(400).json(error)),
+            // insert product
+            save: (req, res) => dao.insert(req.body)
+                .then(result => res.status(200).json(result))
+                .catch(error => res.status(400).json(error)),
+            // update product
+            update: async (req, res) => {
+                // delete file before update data: get file name -> delete file on dest
+                if (req.body['image']) await dao.getById(req.body['id']).then(r => {
+                    if (!r.image.startsWith('http'))
+                        fs.unlinkSync(fs.realpathSync(`src/app_static${r.image}`))
+                }).catch(err => console.error(err))
+                else delete req.body['image'] // delete this field if value is empty
+
+                return await dao.update(req.body)
+                    .then(result => res.status(200).json(result))
+                    .catch(error => res.status(400).json(error))
+            },
+            // delete product
+            delete: async (req, res) => {
+                let id = req.params['0'];
+                // delete file before delete data: get file name -> delete file on dest
+                await dao.getById(id).then(r => {
+                    if (!r.image.startsWith('http'))
+                        fs.unlinkSync(fs.realpathSync(`src/app_static${r.image}`))
+                }).catch(err => console.error(err));
+
+                await dao.delete(id) // delete by id
+                    .then(result => res.status(200).json(result))
+                    .catch(error => res.status(400).json(error))
+            }
+
+        }
+    }
 }
 
 export default new productControl();

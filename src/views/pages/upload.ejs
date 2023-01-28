@@ -1,0 +1,27 @@
+<h1 id="upload">Upload files</h1>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-6">
+            <h3 class="text-success">single file</h3>
+            <form action="/file/uploads" method="post" class="d-flex" enctype="multipart/form-data">
+                <input type="file" accept="image/png, image/jpeg" name="files" class="form-control">
+                <button type="submit" class="btn btn-outline-primary ms-1">upload</button>
+            </form>
+        </div>
+        <div class="col-lg-6">
+            <h3 class="text-success">multiple files</h3>
+            <form action="/file/uploads" method="post" class="d-flex" enctype="multipart/form-data">
+                <input type="file" accept="image/png, image/jpeg" name="files" class="form-control" multiple>
+                <button type="submit" class="btn btn-outline-primary ms-1">upload</button>
+            </form>
+        </div>
+        <div class="col-lg-12 mt-3 d-flex flex-wrap">
+            <% data.forEach((e, i)=> {%>
+                <div class="position-relative col-3" title="<%= e.filename %>">
+                    <img src="<%= e.path %>" alt="<%= e.filename %>" class="flex-fill w-100" style="object-fit: cover;">
+                    <a class="position-absolute end-0 bottom-0 btn btn-outline-danger" href="/file/delete/<%= e.filename %>">Delete</a>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+</div>
