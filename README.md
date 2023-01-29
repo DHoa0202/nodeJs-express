@@ -21,11 +21,11 @@
   - Angular
 
 # Clone this project
-  B1: Clone by git `https://github.com/DHoa0202/bookish-meme.git` or download file[.zip] extract to folder<br/>
+  B1: Clone by git `https://github.com/DHoa0202/bookish-meme.git` or download [bookish-meme.zip](/DHoa0202/bookish-meme/archive/refs/heads/main.zip) extract to folder<br/>
 ```diff
 git clone https://github.com/DHoa0202/bookish-meme.git
 ```
-  B2: Add folder to workspace has been extracted file[.zip] EX: vscode workspace [File>Add folder to workspace...]<br/>
+  B2: Add folder to workspace has been extracted [bookish-meme.zip] EX: vscode workspace [File>Add folder to workspace...]<br/>
   B3: Open TERMINAL or Cmd pointing into folder has been extracted<br/>
 ```
 npm install
