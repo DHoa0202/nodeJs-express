@@ -5,7 +5,8 @@
 ```diff
 git clone https://github.com/DHoa0202/bookish-meme.git
 ```
-  B2: Add folder to workspace has been extracted [bookish-meme.zip] EX: vscode workspace [File>Add folder to workspace...]<br/>
+  B2: Add folder to workspace has been extracted [bookish-meme.zip]<br/>
+    EX: vscode workspace [File>Add folder to workspace...]<br/>
   B3: Open TERMINAL or Cmd pointing into folder has been extracted<br/>
 ```
 npm install
