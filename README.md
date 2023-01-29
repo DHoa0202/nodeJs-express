@@ -1,5 +1,7 @@
 # mini bookish-meme
-
+```diff
+  ! Video demo [Clone git project và triển khai web application](https://youtu.be/YkTWRHM7alo)
+```
 # Clone this bookish-meme project nodejs[express]
   B1: Clone by git `https://github.com/DHoa0202/bookish-meme.git` or download [bookish-meme.zip](../../archive/refs/heads/main.zip) and extract to folder<br/>
 ```diff
