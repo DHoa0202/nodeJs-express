@@ -12,7 +12,7 @@ npm install
 ```
   B4: Execute file database [DB_NODE.sql](./DB_NODE.sql)<br/>
   B5: Comeback to the TERMINAL or Cmd<br/>
-  B6: config username[DB_USER] and password[DB_PASS] [.env](./.env)<br/>
+  B6: configuration username[DB_USER] and password[DB_PASS] to connect to the mssql in [.env](./.env) file<br/>
 ```
 npm start
 ```
