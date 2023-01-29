@@ -18,7 +18,7 @@ npm install
 ```
 npm start
 ```
-Click to http://localhost:8080/app || http://127.0.0.1:8080/app to open
+Click to *http://localhost:8080/app* or *http://127.0.0.1:8080/app* to open
 
 # function
   - build API and CRUD function,
