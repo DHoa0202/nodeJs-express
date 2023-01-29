@@ -21,18 +21,18 @@
   - Angular
 
 # Clone this project
-  !B1: Clone by git `git clone https://github.com/DHoa0202/bookish-meme.git` or download file[.zip] extract to folder<br/>
+  B1: Clone by git `https://github.com/DHoa0202/bookish-meme.git` or download file[.zip] extract to folder<br/>
 ```diff
-! git clone https://github.com/DHoa0202/bookish-meme.git
+  !git clone https://github.com/DHoa0202/bookish-meme.git
 ```
-  !B2: Add folder to workspace has been extracted file[.zip] EX: vscode workspace [File>Add folder to workspace...]<br/>
-  !B3: Open TERMINAL or Cmd pointing into folder has been extracted<br/>
+  B2: Add folder to workspace has been extracted file[.zip] EX: vscode workspace [File>Add folder to workspace...]<br/>
+  B3: Open TERMINAL or Cmd pointing into folder has been extracted<br/>
 ```
 npm install
 ```
-  !B4: Execute file database [DB_NODE.sql](./DB_NODE.sql)<br/>
-  !B5: Comeback to the TERMINAL or Cmd<br/>
-  !B6: config username[DB_USER] and password[DB_PASS] [.env](./.env)<br/>
+  B4: Execute file database [DB_NODE.sql](./DB_NODE.sql)<br/>
+  B5: Comeback to the TERMINAL or Cmd<br/>
+  B6: config username[DB_USER] and password[DB_PASS] [.env](./.env)<br/>
 ```
 npm start
 ```
