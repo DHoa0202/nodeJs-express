@@ -6,8 +6,9 @@
 git clone https://github.com/DHoa0202/bookish-meme.git
 ```
   B2: Add folder to workspace has been extracted [bookish-meme.zip]<br/>
-    EX: vscode workspace [File>Add folder to workspace...]<br/>
-  B3: Open TERMINAL or Cmd pointing into folder has been extracted<br/>
+     EX: vscode workspace [File>Add folder to workspace...]<br/>
+  B3: Open TERMINAL or CMD pointing into folder has been extracted to install all packages<br/>
+     EX: cd D:/vscode_workspace/bookish-meme<br/>
 ```
 npm install
 ```
