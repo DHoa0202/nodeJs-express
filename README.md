@@ -2,7 +2,7 @@
 
 
 # function
-  - build API and CRUD function,\
+  - build API and CRUD function,#
   - upload files (read, save, delete),\
   - connect to database mssql(SQL Server)\
 \
