@@ -95,9 +95,12 @@ class productControl {
                 .then(result => res.status(200).json(result))
                 .catch(error => res.status(400).json(error)),
             // insert product
-            save: (req, res) => dao.insert(req.body)
-                .then(result => res.status(200).json(result))
-                .catch(error => res.status(400).json(error)),
+            save: async (req, res) => {
+                delete req.body['category_name'];
+                return dao.insert(req.body)
+                    .then(result => res.status(200).json(result))
+                    .catch(error => res.status(400).json(error))
+            },
             // update product
             update: async (req, res) => {
                 // delete file before update data: get file name -> delete file on dest
@@ -107,7 +110,8 @@ class productControl {
                 }).catch(err => console.error(err))
                 else delete req.body['image'] // delete this field if value is empty
 
-                return await dao.update(req.body)
+                delete req.body['category_name'];
+                return dao.update(req.body)
                     .then(result => res.status(200).json(result))
                     .catch(error => res.status(400).json(error))
             },

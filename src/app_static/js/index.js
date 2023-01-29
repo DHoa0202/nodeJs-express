@@ -1,3 +1,56 @@
 console.log('index.js for client');
 
 changeImage = (input, img) => img.src = URL.createObjectURL(input.files[0]);
+const util = {
+    // get link url EX: http://localhost:8080/api/...
+    getLink: (host, ...paths) => {
+        return !paths instanceof String ? host.concat('/', paths) : host.concat('/', paths).replaceAll(',', '/')
+    },
+    /**
+     * @param {string} column is attribute name EX: 'id' | undefined
+     * @param {any} value is value of id
+     * @param {Array} array to find index of value
+     * @return {number} of index if exist || -1 if doesn't exist
+     */
+    getIndex: (column, value, array) => {
+        if (!value || !array) return -1; // # 0==false
+        if (column) for (let i = 0; i < array.length; i++) if (array[i][column] == value) return i;
+        else for (let i = 0; i < array.length; i++) if (array[i] == value) return i; return -1;
+    },
+    /**
+     * @param {Array} array to push
+     * @param {object} entity add to array
+     * @param {string} by is the condition column name
+     * @return {Array} array
+     */
+    insert: (array, entity, by) => {
+        let i = util.getIndex(by, entity[by], array);
+        if (i < 0) array.push(entity);
+        else throw `The ${entity[by]} value of the key ${by} already exist!`
+        return array;
+    },
+    /**
+     * @param {Array} array to set
+     * @param {object} entity update on array
+     * @param {string} by is the condition column name
+     * @return {Array} array
+     */
+    update: (array, entity, by) => {
+        let i = util.getIndex(by, entity[by], array);
+        if (-1 < i) array[i] = entity;
+        else throw `The ${entity[by]} value of the key ${by} does not exist!`
+        return array;
+    },
+    /**
+     * @param {Array} array to remove
+     * @param {object} value of column [by] to delete 
+     * @param {string} by is the condition column name
+     * @return {Array} array
+     */
+    delete: (array, value, by) => {
+        let i = util.getIndex(by, value, array);
+        if (-1 < i) array.splice(i, 1);
+        else throw `The ${value} value of the key ${by} does not exist!`
+        return array;
+    }
+}

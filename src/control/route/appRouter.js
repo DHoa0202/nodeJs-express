@@ -11,8 +11,10 @@ const expressRouter = express.Router();
 ((router) => {
 
     // APP METHODS
-    router.get('/info', appControl.info);
-    router.get('/home', appControl.home);
+    router
+        .get('/info', appControl.info)
+        .get('/home', appControl.home)
+        .get('/angularJS', appControl.angularApp)
 
     // CATEGORY
     router
