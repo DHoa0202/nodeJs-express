@@ -5,7 +5,7 @@ import cDao from '../../model/dao/categoryDAO.js';
 import storage from '../../model/util/storage.js';
 import dateRelative from '../../model/util/moment.js';
 
-const routes = storage.breadcumb.concat({ href: '#product', name: 'Sản phẩm' });
+const routes = storage.breadcumb.concat({ href: '#product', name: 'Product' });
 
 class productControl {
 
