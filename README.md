@@ -1,7 +1,7 @@
 # mini bookish-meme
 
 # Clone this bookish-meme project nodejs[express]
-  B1: Clone by git `https://github.com/DHoa0202/bookish-meme.git` or download [bookish-meme.zip](../../archive/refs/heads/main.zip) extract to folder<br/>
+  B1: Clone by git `https://github.com/DHoa0202/bookish-meme.git` or download [bookish-meme.zip](../../archive/refs/heads/main.zip) and extract to folder<br/>
 ```diff
 git clone https://github.com/DHoa0202/bookish-meme.git
 ```
