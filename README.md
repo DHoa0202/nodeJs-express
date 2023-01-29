@@ -13,8 +13,8 @@ git clone https://github.com/DHoa0202/bookish-meme.git
 npm install
 ```
   B4: Execute file database [DB_NODE.sql](./DB_NODE.sql)<br/>
-  B5: Comeback to the TERMINAL or Cmd<br/>
-  B6: configuration username[DB_USER] and password[DB_PASS] to connect to the mssql in [.env](./.env) file<br/>
+  B5: configuration username[DB_USER] and password[DB_PASS] to connect to the mssql in [.env](./.env) file<br/>
+  B6: Comeback to the TERMINAL or CMD to start server application<br/>
 ```
 npm start
 ```
