@@ -21,7 +21,9 @@
   - Angular
 
 # Clone this project
-  B1: Clone by git `git clone https://github.com/DHoa0202/bookish-meme.git` or download file[.zip] extract to folder<br/>
+  <span style="color:green;font-weight:700;font-size:20px">
+    B1
+</span>: Clone by git `git clone https://github.com/DHoa0202/bookish-meme.git` or download file[.zip] extract to folder<br/>
   B2: Add folder to workspace has been extracted file[.zip] EX: vscode workspace [File>Add folder to workspace...]<br/>
   B3: Open TERMINAL or Cmd pointing into folder has been extracted<br/>
 ```
