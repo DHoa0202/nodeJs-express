@@ -1,5 +1,5 @@
 function setValues(values) {
-    for (const i in values) if(isNaN(values[i])) values[i] = `'${values[i]}'`
+    for (const i in values) if(isNaN(values[i])) values[i] = `N'${values[i]}'`
 }
 
 export default {
