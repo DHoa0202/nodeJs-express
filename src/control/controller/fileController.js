@@ -12,14 +12,15 @@ function render(res, add) {
 }
 
 export default (app) => app
-    .get('/file/uploads', (_req, res) => {
+    .get('/uploads', (_req, res) => {
         let directory = fs.realpathSync('./src/app_static/uploads');
         fs.readdirSync(directory).map(filename => arr.push({
             filename: filename, path: `/uploads/${filename}`
         }))
         return render(res, { data: arr });
     })
-    .get('/file/delete/:filename', (req, res) => {
+    .use('/delete/:filename', (req, res) => {
+        res.header('Access-Control-Allow-Methods', 'POST, GET');
         try {
             let directory = fs.realpathSync('./src/app_static/uploads');
             let filename = req.params['filename'];
@@ -31,7 +32,7 @@ export default (app) => app
             return render(res, { data: arr });
         }
     })
-    .post('/file/uploads', upload.any(), (req, res) => {
+    .post('/uploads', upload.any(), (req, res) => {
         req['files'].forEach(({ filename }) => arr.push({
             filename: filename, path: `/uploads/${filename}`
         }));
