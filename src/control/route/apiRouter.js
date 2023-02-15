@@ -1,14 +1,12 @@
-import express from "express";
+import express, { Router } from "express";
 import { api as category } from '../controller/categoryControl.js';
 import { api as product } from '../controller/productControl.js';
 import { api as account } from '../controller/accountControl.js';
-import accountMW from '../middleware/accountMiddleware.js'
+import mw from '../middleware/apiMiddleware.js'
 
-const router = express.Router();
+const expressRouter = Router();
 
-// APIs FOR CLIENT SIDE RENDER
-export default (app) => {
-    app.use(express.json());
+((router) => {
 
     router // CATEGORIES API
         .get('/categories', category.getList) // get all
@@ -25,7 +23,7 @@ export default (app) => {
         .delete('/products/*', product.delete); // delete by id
 
     router // ACCOUNTS API
-        .post('/accounts/login', accountMW.login, account.login)
+        .post('/accounts/login', mw.authorization, account.login)
         .post('/accounts/logout', account.logout)
         .get('/accounts', account.getList) // get all
         .get('/accounts/*', account.getById) // get by id
@@ -33,5 +31,12 @@ export default (app) => {
         .put('/accounts', account.update)
         .delete('/accounts/*', account.delete); // delete by id
 
+    router.use('/*', mw.notfound);
     return router;
-}
+})(expressRouter);
+
+// APIs FOR CLIENT SIDE RENDER
+export default (app) => {
+    app.use(express.json());
+    return expressRouter;
+};

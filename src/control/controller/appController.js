@@ -1,4 +1,3 @@
-import fs from 'fs'
 import storage from '../../model/util/storage.js';
 
 export default {

@@ -18,7 +18,7 @@ const api = {
                     account: { username, password },
                     message: "username or password incorrect!!!"
                 });
-                return res.status(200).json({ accessToken: `Bearer ${jsonToken.sign(account)}` });
+                return res.status(200).json({ accessToken: `${jsonToken.sign(account)}` });
             }).catch(err => res.status(401).json({ message: err }))
     },
 
@@ -26,6 +26,7 @@ const api = {
     logout: (req, res, _next) => {
         const token = req.body['authorization'];
         if (token) {
+            console.log(token);
         }
 
         return res.status(200).json({ message: `you have successfully logged out` })

@@ -84,6 +84,7 @@ class productControl {
         return response;
     }
 }
+
 const api = {
     // get all products
     getList: (_req, res) => dao.getList()

@@ -27,13 +27,13 @@ class accountDAO {
     };
 
     insert = (entity) => sql
-        .execute(query.insert('ACCOUNTS', entity, 'username', 'files'))
+        .execute(query.insert('ACCOUNTS', entity))
         .then(_r => this.getList(1, 'ORDER BY username DESC').then(r2 => r2[0]))
         .catch(e => { throw e });
 
     update = (entity) => sql
-        .execute(query.update('ACCOUNTS', 'username', entity, 'username', 'files'))
-        .then(r => this.getById(entity['username']))
+        .execute(query.update('ACCOUNTS', 'username', entity))
+        .then(_r => this.getById(entity['username']))
         .catch(e => { throw e });
 
     delete = (username) => sql

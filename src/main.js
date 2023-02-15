@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import express from 'express';
 import viewEngine from './app_config/viewEngine.js';
-import router from './control/router.js';
+import controller from './control/controller.js';
 
 // VARIABLES
 const properties = dotenv.config().parsed;
@@ -11,9 +11,11 @@ const port = properties.PORT || 8080;
 
 // CONFIGURATION
 viewEngine(application); // security
-router(application); // router
+controller(application); // router
 
 // START SERVER
 application.listen(port, () => console.log(
-    `\napplication start on http://${host}:${port}\n`
+    `\napplication start on http://${host}:${port}`,
+    `\ndisplay on server http://${host}:${port}/app`,
+    `\ncall RESTapi http://${host}:${port}/api\n`,
 ));

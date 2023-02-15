@@ -10,22 +10,19 @@ const expressRouter = express.Router();
 
 ((router) => {
 
-    // APP METHODS
-    router
+    router // APP METHODS
         .get('/info', appControl.info)
         .get('/home', appControl.home)
-        .get('/angularJS', appControl.angularApp)
+        .get('/angularJS', appControl.angularApp);
 
-    // CATEGORY
-    router
+    router // CATEGORY
         .get('/categories', categoryControl.categories) // get all
         .get('/categories/*', categoryControl.category) // get by id
         .get('/delete_categories/*', categoryControl.delete) // delete by id
         .post('/insert_categories', upload.none(), categoryControl.save)
         .post('/update_categories', upload.none(), categoryControl.update);
 
-    // PRODUCT
-    router
+    router // PRODUCT
         .get('/products', productControl.products) // get all
         .get('/products/*', productControl.product) // get by id
         .get('/delete_products/*', productControl.delete) // delete by id
@@ -37,4 +34,6 @@ const expressRouter = express.Router();
 })(expressRouter);
 
 // SERVER SIDE RENDER
-export default (_app) => expressRouter;
+export default (_app) => {
+    return expressRouter;
+};
