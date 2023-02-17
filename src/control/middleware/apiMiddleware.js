@@ -19,8 +19,11 @@ const middleware = {
     },
 
     notfound: (req, res, _next) => {
+        const origin = req.headers?.origin || req.headers?.host;
+        console.log(`request api from ${origin}`);
+
         return res.status(404).json({
-            message: `${req._parsedUrl.path} not found!!!`,
+            message: `${req.baseUrl} not found!!!`,
             listAPIs: [
                 '/api/categories',
                 '/api/products',

@@ -10,8 +10,8 @@ const host = properties.HOST || 'localhost';
 const port = properties.PORT || 8080;
 
 // CONFIGURATION
-viewEngine(application); // security
-controller(application); // router
+viewEngine(application); // configuration
+controller(application); // controller
 
 // START SERVER
 application.listen(port, () => console.log(
