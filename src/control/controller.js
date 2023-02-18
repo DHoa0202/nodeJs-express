@@ -14,5 +14,5 @@ export default (application) => {
     application
         .use('/file', appMw, fileRouter(application)) // SERVER SIDE RENDER
         .use('/app', appMw, appRouter(application)) // SERVER SIDE RENDER
-        .use('/api', apiMw.accessControl, apiRouter(application)) // API FOR CLIENT
+        .use('/api', apiMw, apiRouter(application)) // API FOR CLIENT
 }

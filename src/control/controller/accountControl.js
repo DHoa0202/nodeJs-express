@@ -10,16 +10,20 @@ const api = {
     // login by username and password
     login: async (req, res) => {
         const [username, password] = [req.body['username'], req.body['password']];
+        let auth = req.headers['authorization'];
 
-        return dao.login(username, password)
+        if (auth) {
+            auth = auth.replace('Bearer ', '');
+            return res.status(200).json(jsonToken.verify(auth))
+        } else return dao.login(username, password)
             .then(account => {
                 delete account?.password;
                 if (!account) return res.status(401).json({
                     account: { username, password },
                     message: "username or password incorrect!!!"
                 });
-                return res.status(200).json({ accessToken: `${jsonToken.sign(account)}` });
-            }).catch(err => res.status(401).json({ message: err }))
+                return res.status(200).json({ account, accessToken: jsonToken.sign(account) });
+            }).catch(err => res.status(401).json({ message: err }));
     },
 
     // login by username and password

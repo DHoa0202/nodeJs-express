@@ -2,9 +2,21 @@ import express, { Router } from "express";
 import { api as category } from '../controller/categoryControl.js';
 import { api as product } from '../controller/productControl.js';
 import { api as account } from '../controller/accountControl.js';
-import mw from '../middleware/apiMiddleware.js'
 
 const expressRouter = Router();
+const notfound = (req, res, _next) => {
+    const origin = req.headers?.origin || req.headers?.host;
+    console.log(`request api from ${origin}`);
+
+    return res.status(404).json({
+        message: `${req.baseUrl} not found!!!`,
+        listAPIs: [
+            '/api/categories',
+            '/api/products',
+            '/api/accounts',
+        ]
+    })
+}
 
 ((router) => {
 
@@ -23,7 +35,7 @@ const expressRouter = Router();
         .delete('/products/*', product.delete); // delete by id
 
     router // ACCOUNTS API
-        .post('/accounts/login', mw.authorization, account.login)
+        .post('/accounts/login', account.login)
         .post('/accounts/logout', account.logout)
         .get('/accounts', account.getList) // get all
         .get('/accounts/*', account.getById) // get by id
@@ -31,7 +43,6 @@ const expressRouter = Router();
         .put('/accounts', account.update)
         .delete('/accounts/*', account.delete); // delete by id
 
-    router.use('/*', mw.notfound);
     return router;
 })(expressRouter);
 

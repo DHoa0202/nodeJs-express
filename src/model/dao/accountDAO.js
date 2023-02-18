@@ -18,6 +18,7 @@ class accountDAO {
     ).then(r => this.#setAccounts(r.recordset)).catch(e => { throw e });
 
     getById = (username) => this.getList(undefined, `WHERE username = '${username}'`).then(r => r[0]);
+    
     login = async (username, password) => {
         if (!username || !username.length) throw `cannot login with empty username!!!`
         else if (!password || !username.length) throw `cannot login with empty password!!!`
