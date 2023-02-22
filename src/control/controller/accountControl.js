@@ -22,7 +22,7 @@ const api = {
                     account: { username, password },
                     message: "username or password incorrect!!!"
                 });
-                return res.status(200).json({ account, accessToken: jsonToken.sign(account) });
+                return res.status(200).json(Object.assign(account, { accessToken: jsonToken.sign(account) }));
             }).catch(err => res.status(401).json({ message: err }));
     },
 
