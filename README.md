@@ -1,14 +1,14 @@
-# mini bookish-meme
+# mini nodeJs-express
 Video demo [Clone git project và triển khai web application youtu.be](https://youtu.be/YkTWRHM7alo)
-# Clone this bookish-meme project nodejs[express]
-  B1: Clone by git `https://github.com/DHoa0202/bookish-meme.git` or download [bookish-meme.zip](../../archive/refs/heads/main.zip) and extract to folder<br/>
+# Clone this nodeJs-express project nodejs[express]
+  B1: Clone by git `https://github.com/DHoa0202/nodeJs-express.git` or download [nodeJs-express.zip](../../archive/refs/heads/main.zip) and extract to folder<br/>
 ```diff
-git clone https://github.com/DHoa0202/bookish-meme.git
+git clone https://github.com/DHoa0202/nodeJs-express.git
 ```
-  B2: Add folder to workspace has been extracted [bookish-meme.zip]<br/>
+  B2: Add folder to workspace has been extracted [nodeJs-express.zip]<br/>
   &emsp;*`EX: vscode workspace [File>Add folder to workspace...]`*<br/>
   B3: Open TERMINAL or CMD pointing into folder has been extracted to install all packages<br/>
-  &emsp;*`EX: cd D:/vscode_workspace/bookish-meme`*<br/>
+  &emsp;*`EX: cd D:/vscode_workspace/nodeJs-express`*<br/>
 ```
 npm install
 ```
